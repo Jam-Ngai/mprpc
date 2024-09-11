@@ -1,9 +1,11 @@
+#include "mprpcapplication.h"
+
 #include <unistd.h>
 
 #include <iostream>
 #include <string>
 
-#include "mprpcapplication.h"
+#include "logger.h"
 
 namespace {
 inline void ShowArgsHelp() {
@@ -11,13 +13,16 @@ inline void ShowArgsHelp() {
 }
 }  // namespace
 
+MprpcConfig MprpcApplication::config_;
+
 void MprpcApplication::Init(int argc, char* argv[]) {
   if (argc < 2) {
     ShowArgsHelp();
+    exit(EXIT_FAILURE);
   }
   int c = 0;
   std::string config_file;
-  while (c = ::getopt(argc, argv, ":i:") != -1) {
+  while ((c = ::getopt(argc, argv, ":i:")) != -1) {
     switch (c) {
       case 'i':
         config_file = optarg;
@@ -33,10 +38,17 @@ void MprpcApplication::Init(int argc, char* argv[]) {
     }
   }
 
-  //开始加载配置文件
+  // 加载配置文件
+  config_.LoadConfigFile(config_file);
+  LOG_INFO(
+      "rpcserverip: %s, rpcserverport: %s, zookeeperip: %s, zookeeperport: %s.",
+      config_.Find("rpcserverip").c_str(), config_.Find("rpcserverport").c_str(),
+      config_.Find("zookeeperip").c_str(), config_.Find("zookeeperport").c_str());
 }
 
 MprpcApplication& MprpcApplication::GetInstance() {
   static MprpcApplication app;
   return app;
 }
+
+MprpcConfig& MprpcApplication::config() const { return config_; }

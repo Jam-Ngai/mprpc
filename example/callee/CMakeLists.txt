@@ -1,6 +1,5 @@
-aux_source_directory(. CALLEE_LIST)
-
-add_executable(consumer ${CALLEE_LIST} ../user.pb.cc)
-target_link_libraries(consumer PRIVATE mprpc protobuf)
-set_target_properties(consumer PROPERTIES RUNTIME_OUTPUT_DIRECTORY
+# add_executable(provider friendservice.cc ../friend.pb.cc)
+add_executable(provider userservice.cc ../user.pb.cc)
+target_link_libraries(provider PRIVATE zookeeper_mt mprpc mymuduo protobuf)
+set_target_properties(provider PROPERTIES RUNTIME_OUTPUT_DIRECTORY
                                           ${CMAKE_SOURCE_DIR}/bin)

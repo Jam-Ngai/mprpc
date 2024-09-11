@@ -6,6 +6,7 @@ class MprpcApplication {
  public:
   static void Init(int argc, char *argv[]);
   static MprpcApplication &GetInstance();
+  MprpcConfig& config() const;
 
  private:
   MprpcApplication() {};
@@ -13,5 +14,5 @@ class MprpcApplication {
   MprpcApplication(MprpcApplication &&) = delete;
   MprpcApplication &operator=(const MprpcApplication &) = delete;
 
-  MprpcConfig config_;
+  static MprpcConfig config_;
 };
