@@ -9,7 +9,7 @@
 
 - 安装库
 
-**_使用前需先安装[mymuduo]((https://github.com/Jam-Ngai/mymuduo.git))、[prorobuf](https://github.com/protocolbuffers/protobuf.git)、和[zookeeper](https://zookeeper.apache.org/releases.html)。_**
+**_使用前需先安装[mymuduo](https://github.com/Jam-Ngai/mymuduo.git)、[prorobuf](https://github.com/protocolbuffers/protobuf.git)、和[zookeeper](https://zookeeper.apache.org/releases.html)。_**
 
 ```shell
 git clone https://github.com/Jam-Ngai/mprpc.git
